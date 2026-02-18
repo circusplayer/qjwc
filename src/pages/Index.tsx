@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Truck, Shield, Phone } from 'lucide-react';
+import { ArrowRight, CheckCircle, Truck, Shield, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCategories } from '@/hooks/useCategories';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import heroBg from '@/assets/qjwcbackground.jpg';
+import introVideo from '@/assets/qjwcvid.mp4';
+import project1 from '@/assets/project1.jpg';
+import project2 from '@/assets/project2.jpg';
+import project3 from '@/assets/project3.jpg';
+import project4 from '@/assets/project4.jpg';
 
 const features = [
   {
@@ -22,6 +30,141 @@ const features = [
     description: 'Best prices in the market without compromising on quality.',
   },
 ];
+
+const projects = [
+  {
+    image: project1,
+    title: 'Steel Roofing Installation',
+    description: 'Commercial building roofing project completed on schedule with premium steel sheets.',
+    location: 'Davao City',
+  },
+  {
+    image: project2,
+    title: 'Industrial Warehouse Build',
+    description: 'Full structural steel and corrugated roofing supply for a large industrial warehouse.',
+    location: 'General Santos City',
+  },
+  {
+    image: project3,
+    title: 'Residential Metal Roofing',
+    description: 'Modern home outfitted with durable long-span color roof and steel framing.',
+    location: 'Koronadal City',
+  },
+  {
+    image: project4,
+    title: 'Multi-Purpose Hall',
+    description: 'Community hall construction using QJWC-supplied structural steel and roofing materials.',
+    location: 'South Cotabato',
+  },
+];
+
+// Project Showcase Carousel
+function ProjectSlider() {
+  const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on('select', onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
+        <div className="flex">
+          {projects.map((project, index) => (
+            <div key={index} className="relative flex-none w-full">
+              <div className="relative h-[420px] md:h-[520px]">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                {/* Text overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
+                  <span className="inline-block text-xs font-medium uppercase tracking-widest bg-primary/80 px-3 py-1 rounded-full mb-3">
+                    {project.location}
+                  </span>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-white/80 text-sm md:text-base max-w-xl">{project.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Prev / Next buttons */}
+      <button
+        onClick={scrollPrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-primary text-white rounded-full w-11 h-11 flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+        aria-label="Previous project"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={scrollNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-primary text-white rounded-full w-11 h-11 flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+        aria-label="Next project"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-2 mt-5">
+        {scrollSnaps.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => scrollTo(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === selectedIndex
+                ? 'bg-primary w-8'
+                : 'bg-muted-foreground/30 w-2 hover:bg-muted-foreground/60'
+            }`}
+            aria-label={`Go to project ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Video Section
+function VideoSection() {
+  return (
+    <div className="relative rounded-2xl overflow-hidden bg-foreground/5 shadow-lg aspect-video">
+      <video
+        className="w-full h-full object-cover"
+        controls
+        autoPlay
+        muted
+        loop
+        preload="auto"
+        playsInline
+        aria-label="QJWC Construction introduction video"
+        poster={heroBg}
+      >
+        <source src={introVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  );
+}
 
 export default function Index() {
   const { data: categories, isLoading } = useCategories();
@@ -90,6 +233,55 @@ export default function Index() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Project Showcase Section */}
+      <section className="py-16 md:py-24">
+        <div className="container">
+          <div className="text-center mb-12">
+            <p className="text-primary text-sm uppercase tracking-widest mb-2 font-medium">Our Work</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Completed Projects</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              See what we've built together with our clients — from residential roofing to large-scale 
+              commercial structures, powered by QJWC materials.
+            </p>
+          </div>
+          <ProjectSlider />
+        </div>
+      </section>
+
+      {/* Introduction Video Section */}
+      <section className="py-16 md:py-24 bg-secondary">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Text side */}
+            <div>
+              <p className="text-primary text-sm uppercase tracking-widest mb-2 font-medium">About Us</p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
+                Your Trusted Partner in Construction Supply
+              </h2>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                QJWC Construction has been serving contractors, builders, and homeowners with premium 
+                quality steel products and roofing materials. We take pride in providing the right 
+                materials at competitive prices with reliable delivery.
+              </p>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Whether you need long-span roofing sheets, C-purlins, angle bars, or other structural 
+                steel components — we have everything your project requires, backed by expert advice.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button asChild className="hover:scale-105 transition-all duration-300">
+                  <Link to="/about">Learn More About Us <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+                <Button variant="outline" asChild className="hover:scale-105 transition-all duration-300">
+                  <Link to="/contact">Get a Free Quote</Link>
+                </Button>
+              </div>
+            </div>
+            {/* Video side */}
+            <VideoSection />
           </div>
         </div>
       </section>
