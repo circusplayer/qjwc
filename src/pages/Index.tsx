@@ -36,25 +36,25 @@ const projects = [
     image: project1,
     title: 'Steel Roofing Installation',
     description: 'Commercial building roofing project completed on schedule with premium steel sheets.',
-    location: 'Davao City',
+    location: 'Paranaque',
   },
   {
     image: project2,
     title: 'Industrial Warehouse Build',
     description: 'Full structural steel and corrugated roofing supply for a large industrial warehouse.',
-    location: 'General Santos City',
+    location: 'Cavite',
   },
   {
     image: project3,
     title: 'Residential Metal Roofing',
     description: 'Modern home outfitted with durable long-span color roof and steel framing.',
-    location: 'Koronadal City',
+    location: 'Laguna',
   },
   {
     image: project4,
     title: 'Multi-Purpose Hall',
     description: 'Community hall construction using QJWC-supplied structural steel and roofing materials.',
-    location: 'South Cotabato',
+    location: 'Batangas',
   },
 ];
 
@@ -97,7 +97,7 @@ function ProjectSlider() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 {/* Text overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
-                  <span className="inline-block text-xs font-medium uppercase tracking-widest bg-primary/80 px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block text-xs font-medium uppercase tracking-widest bg-blue-500 px-3 py-1 rounded-full mb-3">
                     {project.location}
                   </span>
                   <h3 className="font-display text-2xl md:text-3xl font-bold mb-2">{project.title}</h3>
@@ -258,7 +258,7 @@ export default function Index() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Text side */}
             <div>
-              <p className="text-primary text-sm uppercase tracking-widest mb-2 font-medium">About Us</p>
+              <p className="text-primary text-sm uppercase tracking-widest mb-2 font-medium"></p>
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
                 Your Trusted Partner in Construction Supply
               </h2>

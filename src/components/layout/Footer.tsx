@@ -100,7 +100,7 @@ export function Footer() {
           {/* Social Media Icons - Centered */}
           <div className="flex items-center justify-center gap-6">
             <a 
-              href="https://facebook.com" 
+              href="https://www.facebook.com/profile.php?id=61572746810193" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-primary-foreground/70 hover:text-primary-foreground hover:scale-110 transition-all duration-300"
@@ -109,7 +109,7 @@ export function Footer() {
               <Facebook className="h-6 w-6" />
             </a>
             <a 
-              href="https://instagram.com" 
+              href="https://www.facebook.com/profile.php?id=61572746810193" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-primary-foreground/70 hover:text-primary-foreground hover:scale-110 transition-all duration-300"
@@ -118,7 +118,7 @@ export function Footer() {
               <Instagram className="h-6 w-6" />
             </a>
             <a 
-              href="https://tiktok.com" 
+              href="https://www.facebook.com/profile.php?id=61572746810193" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-primary-foreground/70 hover:text-primary-foreground hover:scale-110 transition-all duration-300"
