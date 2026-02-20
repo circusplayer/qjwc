@@ -40,20 +40,20 @@ const projects = [
   },
   {
     image: project2,
-    title: 'Industrial Warehouse Build',
-    description: 'Full structural steel and corrugated roofing supply for a large industrial warehouse.',
+    title: 'Material Delivery & On-Site Support',
+    description: 'We ensure timely delivery of construction materials directly to your project site. Our team assists in unloading and organizing materials to keep your construction process efficient and hassle-free.',
     location: 'Cavite',
   },
   {
     image: project3,
-    title: 'Residential Metal Roofing',
-    description: 'Modern home outfitted with durable long-span color roof and steel framing.',
+    title: 'Roofing Material Assistance',
+    description: 'Coordinating the safe lifting of metal roofing panels to installers on top of a two-story house.',
     location: 'Laguna',
   },
   {
     image: project4,
-    title: 'Multi-Purpose Hall',
-    description: 'Community hall construction using QJWC-supplied structural steel and roofing materials.',
+    title: 'On-Time Site Delivery',
+    description: 'Our organized logistics system ensures materials are delivered directly to your project site safely and on schedule, helping you avoid costly delays.',
     location: 'Batangas',
   },
 ];
@@ -91,7 +91,7 @@ function ProjectSlider() {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain bg-black"
                 />
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -241,11 +241,10 @@ export default function Index() {
       <section className="py-16 md:py-24">
         <div className="container">
           <div className="text-center mb-12">
-            <p className="text-primary text-sm uppercase tracking-widest mb-2 font-medium">Our Work</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Completed Projects</h2>
+            <p className="text-primary text-sm uppercase tracking-widest mb-2 font-medium"></p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Reliable Support Beyond Supplying Materials</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              See what we've built together with our clients — from residential roofing to large-scale 
-              commercial structures, powered by QJWC materials.
+              We don’t just deliver construction materials — we help ensure they are used efficiently and correctly on-site. From material selection to coordination and placement assistance, QJWC supports your project every step of the way.
             </p>
           </div>
           <ProjectSlider />
