@@ -12,6 +12,8 @@ import project1 from '@/assets/project1.jpg';
 import project2 from '@/assets/project2.jpg';
 import project3 from '@/assets/project3.jpg';
 import project4 from '@/assets/project4.jpg';
+import project5 from '@/assets/project5.jpg';
+import project6 from '@/assets/project6.jpg';
 
 const features = [
   {
@@ -32,6 +34,12 @@ const features = [
 ];
 
 const projects = [
+  {
+    image: project6,
+    title: 'Metro-Wide Roofing Project Support',
+    description: 'Providing efficient roofing material supply, coordination, and on-site assistance for various construction projects across Metro Manila, ensuring smooth and timely project execution.',
+    location: 'Metro Manila',
+  },
   {
     image: project1,
     title: 'Steel Roofing Installation',
@@ -56,6 +64,13 @@ const projects = [
     description: 'Our organized logistics system ensures materials are delivered directly to your project site safely and on schedule, helping you avoid costly delays.',
     location: 'Batangas',
   },
+  {
+    image: project5,
+    title: 'Structural Roofing Upgrade',
+    description: 'Upgrading an existing residential roof with high-quality metal sheets to improve durability, weather resistance, and overall structural integrity.',
+    location: 'Rizal',
+  },
+  
 ];
 
 // Project Showcase Carousel
